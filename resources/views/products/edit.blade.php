@@ -23,7 +23,7 @@
         </div>
     @endif
 
-    <form action="{{ route('products.update',$product->id) }}" method="POST">
+    <form action="{{ route('products.update',$product->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -44,6 +44,8 @@
                 <div class="form-group">
                     <strong>image:</strong>
                     <input type="file" name="image" value="{{ $product->image}}" class="form-control" >
+                    <img src="/images/{{ $product->image }}" width="300px">
+
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
