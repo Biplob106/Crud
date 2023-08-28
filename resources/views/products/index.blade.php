@@ -23,6 +23,7 @@
             <th>No</th>
             <th>Name</th>
             <th>Details</th>
+            <th>image</th>
             <th width="280px">Action</th>
         </tr>
         @php
@@ -33,6 +34,7 @@
             <td>{{ ++$i}}</td>
             <td>{{ $product->name }}</td>
             <td>{{ $product->detail }}</td>
+            <td>{{ $product->image }}</td>
             <td>
                 <form action="{{ route('products.destroy',$product->id) }}" method="POST">
 
@@ -51,5 +53,4 @@
     </table>
 
     {{$products->links() }}
-
 @endsection

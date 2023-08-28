@@ -33,7 +33,16 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'detail' => 'required',
+            'image'=>'required|mimes:jpeg,jpg,png,gif|max:2048'
         ]);
+        $input = $request->all();
+
+        if ($image = $request->file('image')) {
+            $destinationPath = 'images/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['image'] = "$profileImage";
+        }
 
         Product::create($request->all());
 
@@ -68,7 +77,7 @@ class ProductController extends Controller
             'detail' => 'required',
         ]);
 
-        $product->update($request->all()); 
+        $product->update($request->all());
 
         return redirect()->route('products.index')
                         ->with('success','Product updated successfully');
